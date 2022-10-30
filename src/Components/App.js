@@ -7,6 +7,7 @@ import Dashboard from "./Dashboard";
 import Login from "./Login";
 import PrivateRoute from "./PrivateRoute";
 import ForgotPassword from "./ForgotPassword"
+import ProfilePic from "./ProfilePic";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/login" element={<Login />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
+                <Route path="/profile-pic" element={<PrivateRoute><ProfilePic /></PrivateRoute>} />
               </Routes>
             </AuthProvider>
           </Router>

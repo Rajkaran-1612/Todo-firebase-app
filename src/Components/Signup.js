@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react'
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from "../Context/AuthContext"
+import { useAuth } from "../Context/AuthContext";
 
 function Signup() {
   const emailRef = useRef()
@@ -14,6 +14,7 @@ function Signup() {
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
 
+
   async function handleSubmit(e) {
     e.preventDefault()
 
@@ -25,7 +26,7 @@ function Signup() {
       setError('')
       setLoading(true)
       await signup(emailRef.current.value, passwordRef.current.value)
-      navigate('/')
+      navigate('/profile-pic')
     } catch {
       setError('Failed to create an account!')
     }
@@ -36,7 +37,7 @@ function Signup() {
 
   return (
     <>
-      <Card>
+      <Card className='mt-3'>
         <Card.Body>
             <h2 className='text-center mb-4'>Sign Up</h2>
             {error && <Alert variant='danger'>{error}</Alert>}
@@ -53,6 +54,7 @@ function Signup() {
                     <Form.Label>Contact Number</Form.Label>
                     <Form.Control type='tel' ref={telRef} required />
                 </Form.Group>
+                
                 <Form.Group id="password">
                     <Form.Label>Password</Form.Label>
                     <Form.Control type='password' ref={passwordRef} required />
@@ -65,7 +67,7 @@ function Signup() {
             </Form>
         </Card.Body>
       </Card>
-      <div className='w-100 text-center mt-2'>
+      <div className='w-100 text-center mt-2 mb-3'>
         Already have an account? <Link to="/login">Log In</Link>
       </div>
     </>

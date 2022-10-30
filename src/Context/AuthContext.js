@@ -3,6 +3,7 @@ import { auth } from '../firebase'
 import { createUserWithEmailAndPassword, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signOut } from 'firebase/auth'
 
 
+
 const AuthContext = React.createContext()
 
 export function useAuth() {
@@ -45,8 +46,10 @@ export function AuthProvider({ children }) {
     login,
     signup,
     logout,
-    resetPassword
+    resetPassword,
   }
+
+  
 
   return (
     <AuthContext.Provider value={value}>

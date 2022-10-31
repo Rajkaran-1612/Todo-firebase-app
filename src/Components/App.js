@@ -9,14 +9,22 @@ import PrivateRoute from "./PrivateRoute";
 import ForgotPassword from "./ForgotPassword"
 import ProfilePic from "./ProfilePic";
 import UpdateProfile from "./UpdateProfile";
+import AddTodo from "./AddTodo";
+import TodoList from "./TodoList";
 
 function App() {
 
   const [userId, setUserId] = useState("");
+  const [TodoId, setTodoId] = useState("");
 
   const getUserIdHandler =(id) => {
     console.log("User Id is: ", id)
     setUserId(id);
+  }
+
+  const getTodoIdHandler =(id) => {
+    console.log("Todo Id is: ", id)
+    setTodoId(id);
   }
 
   return (
@@ -32,6 +40,7 @@ function App() {
                 <Route path="/login" element={<Login />} />
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/profile-pic" element={<PrivateRoute><ProfilePic /></PrivateRoute>} />
+                <Route path="/add-todo" element={<PrivateRoute><AddTodo id={TodoId} setTodoId={setTodoId} /><TodoList getTodoId={getTodoIdHandler} /></PrivateRoute>} />
               </Routes>
             </AuthProvider>
           </Router>

@@ -29,8 +29,11 @@ function UpdateProfile( { id, setUserId } ) {
         contact
     };
 
+    setLoading(true);
+
     await userDataService.updateUser(id, newUser);
     setUserId("")
+    setLoading(false);
     alert("Updated the profile!");
     navigate('/')
   }

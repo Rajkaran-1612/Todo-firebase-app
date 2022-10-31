@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react"
 import { Card, Button, Alert } from "react-bootstrap"
 import { useAuth } from "../Context/AuthContext"
 import { Link, useNavigate } from "react-router-dom"
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../firebase";
 import userDataService from "../services/crudFirestore"; 
 
 export default function Dashboard( { getUserId } ) {
@@ -55,6 +53,9 @@ export default function Dashboard( { getUserId } ) {
                 <strong>Contact:</strong> {doc.contact} <br />
                 <Link to="/update-profile" onClick={(e) => getUserId(doc.id)} className="btn btn-primary w-100 mt-3">
                   Update Profile
+                </Link>
+                <Link to="/add-todo" className="btn btn-primary w-100 mt-3">
+                  Check My Todos
                 </Link>
                 </>
               )

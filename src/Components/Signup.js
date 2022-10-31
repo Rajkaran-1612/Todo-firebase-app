@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react'
 import { Form, Button, Card, Alert } from "react-bootstrap";
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from "../Context/AuthContext";
+import userDataService from "../services/crudFirestore"; 
 
 function Signup() {
   const emailRef = useRef()
@@ -13,6 +14,9 @@ function Signup() {
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
   const navigate = useNavigate()
+  const [name, setName] = useState("")
+  const [email, setEmail] = useState("")
+  const [contact, setContact] = useState("")
 
 
   async function handleSubmit(e) {
@@ -21,6 +25,14 @@ function Signup() {
     if (passwordRef.current.value !== passwordConfirmRef.current.value) {
       return setError('Passwords do not match!')
     }
+
+    const newUser = {
+      name,
+      email,
+      contact
+    };
+
+    await userDataService.addUser(newUser);
 
     try {
       setError('')
@@ -33,6 +45,10 @@ function Signup() {
 
     setLoading(false)
 
+    setName("");
+    setEmail("");
+    setContact("");
+
   }
 
   return (
@@ -44,17 +60,16 @@ function Signup() {
             <Form onSubmit={handleSubmit}>
                 <Form.Group id="name">
                     <Form.Label>Name</Form.Label>
-                    <Form.Control type='text' ref={nameRef} required />
+                    <Form.Control type='text' value={name} onChange={(e) => setName(e.target.value)} ref={nameRef} required />
                 </Form.Group>
                 <Form.Group id="email">
                     <Form.Label>Email</Form.Label>
-                    <Form.Control type='email' ref={emailRef} required />
+                    <Form.Control type='email' value={email} onChange={(e) => setEmail(e.target.value)} ref={emailRef} required />
                 </Form.Group>
                 <Form.Group id="contact">
                     <Form.Label>Contact Number</Form.Label>
-                    <Form.Control type='tel' ref={telRef} required />
+                    <Form.Control type='tel' value={contact} onChange={(e) => setContact(e.target.value)} ref={telRef} required />
                 </Form.Group>
-                
                 <Form.Group id="password">
                     <Form.Label>Password</Form.Label>
                     <Form.Control type='password' ref={passwordRef} required />

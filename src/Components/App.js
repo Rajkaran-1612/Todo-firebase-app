@@ -11,6 +11,11 @@ import ProfilePic from "./ProfilePic";
 import UpdateProfile from "./UpdateProfile";
 import AddTodo from "./AddTodo";
 import TodoList from "./TodoList";
+import AdminLogin from "./AdminLogin";
+import AdminPanel from "./AdminPanel";
+import AdminRoute from "./AdminRoute";
+import AdminPanelCreateUser from "./AdminPanelCreateUser";
+import TodoListAdmin from "./TodoListAdmin";
 
 function App() {
 
@@ -41,6 +46,10 @@ function App() {
                 <Route path="/forgot-password" element={<ForgotPassword />} />
                 <Route path="/profile-pic" element={<PrivateRoute><ProfilePic /></PrivateRoute>} />
                 <Route path="/add-todo" element={<PrivateRoute><AddTodo id={TodoId} setTodoId={setTodoId} /><TodoList getTodoId={getTodoIdHandler} /></PrivateRoute>} />
+                <Route path="/admin-login" element={<AdminLogin />} />
+                <Route path="/admin-panel" element={<AdminRoute><AdminPanel /></AdminRoute> } />
+                <Route path="/admin-panel-c-user" element={<AdminRoute><AdminPanelCreateUser /></AdminRoute> } />
+                <Route path="/todo-list-admin" element={<AdminRoute><TodoListAdmin /></AdminRoute> } />
               </Routes>
             </AuthProvider>
           </Router>

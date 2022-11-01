@@ -3,7 +3,7 @@ import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../Context/AuthContext";
 import { Link, useNavigate } from 'react-router-dom';
 
-export default function Login() {
+function AdminLogin() {
   const emailRef = useRef()
   const passwordRef = useRef()
   const { login } = useAuth()
@@ -17,8 +17,12 @@ export default function Login() {
     try {
       setError('')
       setLoading(true)
-      await login(emailRef.current.value, passwordRef.current.value)
-      navigate('/')
+      if(emailRef.current.value === "test@test.com" && passwordRef.current.value === "pass@123") {
+        await login(emailRef.current.value, passwordRef.current.value)
+        navigate('/admin-panel')
+      } else {
+        setError('Failed to sign in!')
+      }
     } catch {
       setError('Failed to sign in!')
     }
@@ -31,7 +35,7 @@ export default function Login() {
     <>
       <Card>
         <Card.Body>
-            <h2 className='text-center mb-4'>User Log In</h2>
+            <h2 className='text-center mb-4'>Admin Log In</h2>
             {error && <Alert variant='danger'>{error}</Alert>}
             <Form onSubmit={handleSubmit}>
                 <Form.Group id="email">
@@ -53,9 +57,11 @@ export default function Login() {
         Need an account? <Link to="/signup">Sign Up</Link>
       </div>
       <div className='w-100 text-center mt-3'>
-        <Link to="/admin-login">Login as admin</Link>
+        <Link to="/login">Login as User</Link>
       </div>
       
     </>
   )
 }
+
+export default AdminLogin

@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react";
 import { Table, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import { todoDataService } from "../services/crudFirestore";
+import { useAuth } from "../Context/AuthContext"
 import './TodoList.css';
 
 function TodoListAdmin() {
     const [todos, setTodos] = useState([]);
+    const { logout } = useAuth()
     const navigate = useNavigate();
   
     useEffect(() => {
@@ -22,6 +24,16 @@ function TodoListAdmin() {
         navigate('/admin-panel');
     }
 
+    async function handleLogout() {
+
+      try {
+        await logout()
+        navigate("/admin-login")
+      } catch {
+  
+      }
+    }
+
     return (
       <>
         <div className="mb-2">
@@ -30,6 +42,9 @@ function TodoListAdmin() {
           </Button>
           <Button variant="primary edit" onClick={back}>
             View Users
+          </Button>
+          <Button variant="dark edit" onClick={handleLogout}>
+            Logout
           </Button>
         </div>
   
